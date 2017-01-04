@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MYBLOG</title>
+</head>
+<body>
+
+{% if request.user.username %}
+    <h1>Welcome {{ request.user.username }}  <a href="/users/logout">Logout</a></h1>
+{% endif %}
+
+<ol>
+    {% for blog_semih in blogn %}
+        <li>
+            <h1>{{ blog_semih.namex }}</h1>
+            <p>{{ blog_semih.descriptionx }}</p>
+            {% for tag in blog_semih.tagsx.all %}
+                +{{ tag.namex }}
+            {% endfor  %}
+            <p>&nbsp;&nbsp;&nbsp; written by: {{ blog_semih.ownerx.username }}</p>
+        </li>
+    {% endfor %}
+</ol>
+
+
+{% if formx %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ formx }}
+        <button type="submit">Submit</button>
+    </form>
+{% endif %}
+
+</body>
+</html>
